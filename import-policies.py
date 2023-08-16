@@ -88,33 +88,28 @@ def upload_data_to_weaviate(client: Client, batch_size: int = 200) -> None:
         timeout_retries=5,
     )
 
-    f = open('data/movies.json')
+    f = open('data/policies.json')
     data = json.load(f)
 
-    print("Import all movie data")
-
-    # add the Directors, Cast, Genres
-    add_class_items(client, "Director", data, batch_size)
-    add_class_items(client, "Cast", data, batch_size)
-    add_class_items(client, "Genre", data, batch_size)
+    print("Import all policies")
 
     # add the movie
-    print("Add Movies")
+    print("Add Policies")
     c = 0
     start = time.time()
-    for movie in data:
-        client.batch.add_data_object({
-            "year": int(movie["Release Year"]),
-            "title": movie["Title"],
-            "origin": movie["Origin/Ethnicity"],
-            "wiki": movie["Wiki Page"],
-            "plot": movie["Plot"]
-        }, "Movie", generate_uuid(movie["Title"]))
-        c = c + 1
-        if c == batch_size:
-            print("Add batch of Movies")
-            batch_callback(client.batch.create_objects())
-            c = 0
+    for catObj in data:
+        category = catObj["category"]
+        for policy in catObj["policies"]:
+            client.batch.add_data_object({
+                "description":
+                policy["description"],
+                "name": policy["policyNo"],
+                "category": category
+            }, "Policy", generate_uuid(policy["policyNo"]))
+            c = c + 1
+            if c == batch_size:
+                batch_callback(client.batch.create_objects())
+                c = 0
             stop = time.time()
             print("⌛ The OpenAI rate limit is set to",
                   batch_size, " per minute")
@@ -122,29 +117,46 @@ def upload_data_to_weaviate(client: Client, batch_size: int = 200) -> None:
                 60 - (stop - start)), "seconds before continuing")
             time.sleep(60 - (stop - start) + 1)
             start = time.time()
+        batch_callback(client.batch.create_objects())
 
-    print("Add batch of Movies")
-    batch_callback(client.batch.create_objects())
+    # for policy in data:
+    #     client.batch.add_data_object({
+    #         "year": int(policy["Release Year"]),
+    #         "title": policy["Title"],
+    #         "origin": policy["Origin/Ethnicity"],
+    #         "wiki": policy["Wiki Page"],
+    #         "plot": policy["Plot"]
+    #     }, "Policy", generate_uuid(policy["Title"]))
+    #         print("Add batch of Movies")
+    #         print("⌛ The OpenAI rate limit is set to",
+    #               batch_size, " per minute")
+    #         print("⌛ Sleep for te remaining", round(
+    #             60 - (stop - start)), "seconds before continuing")
+    #         time.sleep(60 - (stop - start) + 1)
+    #         start = time.time()
+
+    # print("Add batch of Movies")
+    # batch_callback(client.batch.create_objects())
 
     # add the crefs
-    print("Add crefs")
-    for movie in data:
-        client.batch(batch_size=1000, dynamic=True)
-        for director in split_items("Director", movie):
-            client.batch.add_reference(generate_uuid(
-                movie["Title"]), "Movie", "director", generate_uuid(director.strip()))
-            client.batch.add_reference(generate_uuid(
-                director.strip()), "Director", "movies", generate_uuid(movie["Title"]))
-        for actor in split_items("Cast", movie):
-            client.batch.add_reference(generate_uuid(
-                movie["Title"]), "Movie", "cast", generate_uuid(actor.strip()))
-            client.batch.add_reference(generate_uuid(
-                actor.strip()), "Cast", "movies", generate_uuid(movie["Title"]))
-        for genre in split_items("Genre", movie):
-            client.batch.add_reference(generate_uuid(
-                movie["Title"]), "Movie", "genre", generate_uuid(genre.strip()))
-    client.batch.create_references()
-    print('done')
+    # print("Add crefs")
+    # for policy in data:
+    #     client.batch(batch_size=1000, dynamic=True)
+    #     for director in split_items("Director", policy):
+    #         client.batch.add_reference(generate_uuid(
+    #             policy["Title"]), "Movie", "director", generate_uuid(director.strip()))
+    #         client.batch.add_reference(generate_uuid(
+    #             director.strip()), "Director", "movies", generate_uuid(policy["Title"]))
+    #     for actor in split_items("Cast", policy):
+    #         client.batch.add_reference(generate_uuid(
+    #             policy["Title"]), "Movie", "cast", generate_uuid(actor.strip()))
+    #         client.batch.add_reference(generate_uuid(
+    #             actor.strip()), "Cast", "movies", generate_uuid(policy["Title"]))
+    #     for genre in split_items("Genre", policy):
+    #         client.batch.add_reference(generate_uuid(
+    #             policy["Title"]), "Movie", "genre", generate_uuid(genre.strip()))
+    # client.batch.create_references()
+    # print('done')
 
 
 def print_usage() -> None:
@@ -191,17 +203,18 @@ def main():
         main_client.schema.create(schema_file)
         print(f"Creating Schema done")
 
-    # print(f"Importing data from dataset based on batch size:", int(sys.argv[2]))
+    print(f"Importing data from dataset based on batch size:",
+          int(sys.argv[2]))
     # if nr_argv == 3:
     #     upload_data_to_weaviate(
     #         client=main_client,
     #         batch_size=int(sys.argv[2])
     #     )
     # else:
-    #     upload_data_to_weaviate(
-    #         client=main_client,
-    #         batch_size=100
-    #     )
+    upload_data_to_weaviate(
+        client=main_client,
+        batch_size=100
+    )
 
 
 if __name__ == "__main__":

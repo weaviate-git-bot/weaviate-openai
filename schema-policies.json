@@ -36,7 +36,7 @@
           }
         },
         {
-          "dataType": ["Policy"],
+          "dataType": ["string"],
           "description": "Policy Category",
           "name": "category",
           "moduleConfig": {

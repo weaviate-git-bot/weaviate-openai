@@ -3,35 +3,35 @@
     "category": "Client Service Resilience",
     "policies": [
       {
-        "policy number": "CSP-011",
+        "policyNo": "CSP-011",
         "description": "Perform Desktop Walkthrough exercises of the BCP for all Critical departments/functions annually"
       },
       {
-        "policy number": "CSP-012",
+        "policyNo": "CSP-012",
         "description": "Perform Call Notification tests with confirmation of call acceptance and response time annually"
       },
       {
-        "policy number": "CSP-013",
+        "policyNo": "CSP-013",
         "description": "Perform Components Test for all strategies annually, with an outcome of pass or fail assessed against...\nService Recovery Time Objective (SRTO) achieved where relevant\nAccess of all key systems and applications confirmed"
       },
       {
-        "policy number": "CSP-021",
+        "policyNo": "CSP-021",
         "description": "Perform Crisis Management Plan Review annually"
       },
       {
-        "policy number": "CSP-022",
+        "policyNo": "CSP-022",
         "description": "Perform Crisis Management Simulation exercises not less than once every 3 years, with assessment against:\nParticipation by required attendees;\nParticipant confirmation of understanding of roles and responsibilities;\nValidation of plan details and assumptions;\nIdentification of gaps or improvement opportunities to the CM plans."
       },
       {
-        "policy number": "CSP-023",
+        "policyNo": "CSP-023",
         "description": "Crisis Management Discussion exercises (based scenarios) not less than once every 3 years in years where no simulation exercise is conducted"
       },
       {
-        "policy number": "CSP-031",
+        "policyNo": "CSP-031",
         "description": "For ‘High Risk’ Third Parties (as defined in the Third Party Management Policy), not less than once every 3 years:\nConduct a Desktop walkthrough exercise with the Plan owner and Resilience team to review and sign off on the adequacy of the Third Party Contingency Plans (“TPCP”).\nCoordinate a review of the external Third-Party Business Continuity and IT Disaster Recovery test results."
       },
       {
-        "policy number": "CSP-032",
+        "policyNo": "CSP-032",
         "description": "For ‘Medium Risk’ Third Parties, not less than once every 3 years must:\nAttest on maintenance of external Third-Party Resilience capabilities to the Resilience team."
       }
     ]
@@ -40,7 +40,7 @@
     "category": "Standalone Machine Management",
     "policies": [
       {
-        "policy number": "SMM-010",
+        "policyNo": "SMM-010",
         "description": "Ensure the standard approved build is deployed for servers and workstations."
       },
       {
@@ -48,71 +48,71 @@
         "description": "Ensure that operating systems are licensed with vendor-support and not obsolete."
       },
       {
-        "policy number": "SMM-030",
+        "policyNo": "SMM-030",
         "description": "Ensure relevant patches are up to date, at least monthly."
       },
       {
-        "policy number": "SMM-040",
+        "policyNo": "SMM-040",
         "description": "Ensure that an Anti-virus program is installed with updates to both virus definitions and binaries and applied monthly in line with Group Standards."
       },
       {
-        "policy number": "SMM-050",
+        "policyNo": "SMM-050",
         "description": "Enable both Audit and Event Logging.\n[Reference Security Logging & Monitoring Standard]"
       },
       {
-        "policy number": "SMM-060",
+        "policyNo": "SMM-060",
         "description": "Disable media auto-run features."
       },
       {
-        "policy number": "SMM-070",
+        "policyNo": "SMM-070",
         "description": "Enable screen time-out and lock [15 minutes]\n[Reference Access Control Management and Governance (ACMG) Standard Section 3.1d]"
       },
       {
-        "policy number": "SMM-080",
+        "policyNo": "SMM-080",
         "description": "Disable automatic or anonymous logins"
       },
       {
-        "policy number": "SMM-090",
+        "policyNo": "SMM-090",
         "description": "Ensure that administrator specific privileged user access accounts are created. No shared or generic accounts are allowed.\n[Reference: Access Control Management & Governance Standard]"
       },
       {
-        "policy number": "SMM-100",
+        "policyNo": "SMM-100",
         "description": "Apply password complexity for both user and privileged accounts as per Group ICS Standards.\n\n[Reference: Access Control Management & Governance Standard]"
       },
       {
-        "policy number": "SMM-110",
+        "policyNo": "SMM-110",
         "description": "Ensure an annual review of firewall rules is carried out and unsecure or unnecessary rules removed."
       },
       {
-        "policy number": "SMM-120",
+        "policyNo": "SMM-120",
         "description": "Ensure only encrypted USB storage devices are used for data transfers.\nNote: Exceptions must be tracked, reviewed periodically and reported to appropriate country risk committee(s)."
       },
       {
-        "policy number": "SMM-130",
+        "policyNo": "SMM-130",
         "description": "Not install, upload or download any content not related to the business purpose of the machine.\n[For example: images, music files, software programs]"
       },
       {
-        "policy number": "SMM-140",
+        "policyNo": "SMM-140",
         "description": "Only install Group approved Third Party software that is fully licensed and managed."
       },
       {
-        "policy number": "SMM-150",
+        "policyNo": "SMM-150",
         "description": "Ensure that Restricted and Confidential data is not stored on the machine at any point.\nNote: The processing and transfer of data is acceptable as long as it meets the required standards."
       },
       {
-        "policy number": "SMM-160",
+        "policyNo": "SMM-160",
         "description": "Ensure a centralised inventory is managed and up to date."
       },
       {
-        "policy number": "SMM-170",
+        "policyNo": "SMM-170",
         "description": "Ensure that access reviews are carried out every six\n(6)  months to ensure:\nOnly privileged accounts and unique user ID are used\n2.   Only authorized users have a privileged account\nEvidence of access reviews must be retained for Audit."
       },
       {
-        "policy number": "SMM-180",
+        "policyNo": "SMM-180",
         "description": "Carry out an annual review to ensure all Standalone Machines are identified and that they are still required and relevant.\nStandalone Machines must also be classified to ensure that where high-risk Machines occur, all controls are applied."
       },
       {
-        "policy number": "SMM-190",
+        "policyNo": "SMM-190",
         "description": "Grant Approval for the usage of each Standalone for one year based on the Annual Review process."
       }
     ]
