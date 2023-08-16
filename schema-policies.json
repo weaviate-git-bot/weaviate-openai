@@ -1,0 +1,66 @@
+{
+  "classes": [
+    {
+      "class": "Policy",
+      "description": "A policy",
+      "vectorIndexConfig": {
+        "vectorCacheMaxObjects": 100000,
+        "ef": 2500
+      },
+      "moduleConfig": {
+        "text2vec-openai": {
+          "resourceName": "cog-42bbrearckery",
+          "deploymentId": "embedding",
+          "vectorizeClassName": true
+        }
+      },
+      "properties": [
+        {
+          "dataType": ["string"],
+          "name": "name",
+          "moduleConfig": {
+            "text2vec-openai": {
+              "skip": false,
+              "vectorizePropertyName": true
+            }
+          }
+        },
+        {
+          "dataType": ["string"],
+          "name": "description",
+          "moduleConfig": {
+            "text2vec-openai": {
+              "skip": false,
+              "vectorizePropertyName": true
+            }
+          }
+        },
+        {
+          "dataType": ["Policy"],
+          "description": "Policy Category",
+          "name": "category",
+          "moduleConfig": {
+            "text2vec-openai": {
+              "vectorizePropertyName": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "class": "PolicyCat",
+      "description": "Policy Category",
+      "vectorIndexConfig": {
+        "skip": true
+      },
+      "vectorizer": "none",
+      "properties": [
+        {
+          "dataType": ["string"],
+          "name": "name",
+          "description": "A policy"
+        }
+      ]
+    }
+  ]
+}
