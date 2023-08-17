@@ -101,27 +101,27 @@ def upload_data_to_weaviate(client: Client, batch_size: int = 200) -> None:
     for catObj in data:
         category = catObj["category"]
         for policy in catObj["policies"]:
-            policyNo = policy["policyNo"]
-            if policyNo == "CSP-031":
-                insertTrue = True
-            if insertTrue:
-                client.batch.add_data_object({
-                    "description":
-                    policy["description"],
-                    "name": policy["policyNo"],
-                    "category": category
-                }, "Policy", generate_uuid(policy["policyNo"]))
-                c = c + 1
-                if c == batch_size:
-                    batch_callback(client.batch.create_objects())
-                    c = 0
-                    stop = time.time()
-                    print("⌛ The OpenAI rate limit is set to",
-                          batch_size, " per minute")
-                    print("⌛ Sleep for the remaining", round(
-                        20 - (stop - start)), "seconds before continuing")
-                    time.sleep(20 - (stop - start) + 1)
-                    start = time.time()
+            # policyNo = policy["policyNo"]
+            # if policyNo == "CSP-031":
+            # insertTrue = True
+            # if insertTrue:
+            client.batch.add_data_object({
+                "description":
+                policy["description"],
+                "name": policy["policyNo"],
+                "category": category
+            }, "Policy", generate_uuid(policy["policyNo"]))
+            c = c + 1
+            if c == batch_size:
+                batch_callback(client.batch.create_objects())
+                c = 0
+                stop = time.time()
+                print("⌛ The OpenAI rate limit is set to",
+                      batch_size, " per minute")
+                print("⌛ Sleep for the remaining", round(
+                    20 - (stop - start)), "seconds before continuing")
+                time.sleep(20 - (stop - start) + 1)
+                start = time.time()
     batch_callback(client.batch.create_objects())
 
     # for policy in data:
@@ -199,14 +199,14 @@ def main():
         time.sleep(2.0)
 
     # Empty the Weaviate
-    # main_client.schema.delete_all()
+    main_client.schema.delete_all()
 
-    # if not main_client.schema.contains():
-    #     print(f"Creating Schema")
-    #     dir_path = os.path.dirname(os.path.realpath(__file__))
-    #     schema_file = os.path.join(dir_path, "schema-policies.json")
-    #     main_client.schema.create(schema_file)
-    #     print(f"Creating Schema done")
+    if not main_client.schema.contains():
+        print(f"Creating Schema")
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        schema_file = os.path.join(dir_path, "schema-policies.json")
+        main_client.schema.create(schema_file)
+        print(f"Creating Schema done")
 
     print(f"Importing data from dataset based on batch size:",
           int(sys.argv[2]))
