@@ -44,7 +44,7 @@
         "description": "Ensure the standard approved build is deployed for servers and workstations."
       },
       {
-        "policy number": "SMM-020",
+        "policyNo": "SMM-020",
         "description": "Ensure that operating systems are licensed with vendor-support and not obsolete."
       },
       {
